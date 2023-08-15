@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme } from 'antd';
-
+import myPromise from './myPromise/handPromise'
 const { Header, Content, Footer, Sider } = Layout;
 
 const items: MenuProps['items'] = [
@@ -29,10 +29,15 @@ const items: MenuProps['items'] = [
   label: `nav ${index + 1}`,
 }));
 
+
+
 const App: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  useEffect(() => {
+    myPromise()
+  }, [])
 
   return (
     <Layout hasSider>
@@ -51,23 +56,22 @@ const App: React.FC = () => {
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
         <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-          <div style={{ padding: 24, textAlign: 'center', background: colorBgContainer }}>
-            <p>long content</p>
-            {
-              // indicates very long content
-              Array.from({ length: 100 }, (_, index) => (
-                <React.Fragment key={index}>
-                  {index % 20 === 0 && index ? 'more' : '...'}
-                  <br />
-                </React.Fragment>
-              ))
-            }
+        <Content style={{ margin: '24px 16px 0' }}>
+
+          <div
+            style={{
+              width: "1000px",
+              height: "500px",
+            }}>
+            <video width="730" height="450" controls autoPlay>
+              <source src="aabb.mp4" type="video/mp4" />
+              <param name="wmode" value="opaque" />
+            </video>
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
       </Layout>
-    </Layout>
+    </Layout >
   );
 };
 
